@@ -31,6 +31,7 @@ CREATE TABLE `Campaign` (
   PRIMARY KEY (`id`),
   KEY `client_customer_id` (`customer_id`),
   KEY `campaign_budget` (`campaign_budget`),
+  KEY `remoteId` (`remoteId`),
   CONSTRAINT `Campaign_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `Account` (`client_customer_id`),
   CONSTRAINT `Campaign_ibfk_2` FOREIGN KEY (`campaign_budget`) REFERENCES `CampaignBudget` (`resource_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
@@ -45,4 +46,4 @@ CREATE TABLE `Campaign` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-05 11:21:08
+-- Dump completed on 2019-07-05 12:36:19
