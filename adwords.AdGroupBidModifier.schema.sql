@@ -16,20 +16,20 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Account`
+-- Table structure for table `AdGroupBidModifier`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Account` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `manager_id` bigint(20) NOT NULL,
-  `client_customer_id` bigint(20) unsigned NOT NULL,
-  `account_name` varchar(255) NOT NULL,
-  `is_production` tinyint(2) NOT NULL,
+CREATE TABLE `AdGroupBidModifier` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `resource_name` varchar(255) GENERATED ALWAYS AS (json_value(`value`,'$.resource_name')) VIRTUAL,
+  `ad_group` varchar(255) GENERATED ALWAYS AS (json_value(`value`,'$.ad_group.value')) VIRTUAL,
+  `remote_id` bigint(20) unsigned GENERATED ALWAYS AS (json_value(`value`,'$.criterion_id.value')) VIRTUAL,
   PRIMARY KEY (`id`),
-  UNIQUE KEY `client_customer_id` (`client_customer_id`),
-  KEY `manager_id` (`manager_id`)
+  UNIQUE KEY `resource_name` (`resource_name`),
+  KEY `ad_group` (`ad_group`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;

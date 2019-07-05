@@ -25,8 +25,8 @@ CREATE TABLE `AdGroupAd` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `resource_name` varchar(255) GENERATED ALWAYS AS (json_value(`value`,'$.resource_name')) VIRTUAL,
-  `remoteId` bigint(20) unsigned GENERATED ALWAYS AS (json_value(`value`,'$.ad.id.value')) VIRTUAL,
   `ad_group` varchar(255) GENERATED ALWAYS AS (json_value(`value`,'$.ad_group.value')) VIRTUAL,
+  `remote_id` bigint(20) unsigned GENERATED ALWAYS AS (json_value(`value`,'$.ad.id.value')) VIRTUAL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `resource_name` (`resource_name`),
   KEY `ad_group` (`ad_group`)
@@ -42,4 +42,4 @@ CREATE TABLE `AdGroupAd` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-05 17:53:45
+-- Dump completed on 2019-07-05 17:59:11
