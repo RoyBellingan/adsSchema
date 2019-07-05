@@ -16,23 +16,16 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `CampaignCriterion`
+-- Table structure for table `AdGroup`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `CampaignCriterion` (
+CREATE TABLE `AdGroup` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `campaign` varchar(255) GENERATED ALWAYS AS (json_value(`value`,'$.campaign.value')) VIRTUAL,
-  `remote_id` bigint(20) unsigned GENERATED ALWAYS AS (json_value(`value`,'$.criterion_id.value')) VIRTUAL,
-  `resource_name` varchar(255) GENERATED ALWAYS AS (concat(replace('customers/1/campaigns/762','campaigns','campaignCriteria'),'~',`remote_id`)) VIRTUAL,
-  PRIMARY KEY (`id`),
-  KEY `campaign` (`campaign`),
-  KEY `remote_id` (`remote_id`),
-  KEY `resource_name` (`resource_name`),
-  CONSTRAINT `CampaignCriterion_ibfk_1` FOREIGN KEY (`campaign`) REFERENCES `Campaign` (`resource_name`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+  `value` int(11) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

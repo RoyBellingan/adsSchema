@@ -28,7 +28,9 @@ CREATE TABLE `Campaign` (
   `remoteId` bigint(20) unsigned GENERATED ALWAYS AS (json_value(`value`,'$.id.value')) VIRTUAL,
   `resource_name` varchar(255) GENERATED ALWAYS AS (concat('customers/',`customer_id`,'/campaigns/',`remoteId`)) VIRTUAL,
   `campaign_budget` varchar(255) GENERATED ALWAYS AS (json_value(`value`,'$.campaign_budget.value')) VIRTUAL,
+  `remote_id` bigint(20) unsigned GENERATED ALWAYS AS (json_value(`value`,'$.id.value')) VIRTUAL,
   PRIMARY KEY (`id`),
+  UNIQUE KEY `resource_name` (`resource_name`),
   KEY `client_customer_id` (`customer_id`),
   KEY `campaign_budget` (`campaign_budget`),
   KEY `remoteId` (`remoteId`),
@@ -46,4 +48,4 @@ CREATE TABLE `Campaign` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-05 12:36:19
+-- Dump completed on 2019-07-05 16:51:45
