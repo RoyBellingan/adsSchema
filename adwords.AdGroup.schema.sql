@@ -23,9 +23,13 @@
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `AdGroup` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-  `value` int(11) NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+  `value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `resource_name` varchar(255) GENERATED ALWAYS AS (json_value(`value`,'$.resource_name')) VIRTUAL,
+  `remote_id` bigint(20) unsigned GENERATED ALWAYS AS (json_value(`value`,'$.id.value')) VIRTUAL,
+  `campaign` varchar(255) GENERATED ALWAYS AS (json_value(`value`,'$.campaign.value')) VIRTUAL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `resource_name` (`resource_name`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -37,4 +41,4 @@ CREATE TABLE `AdGroup` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-05 16:51:45
+-- Dump completed on 2019-07-05 17:53:45

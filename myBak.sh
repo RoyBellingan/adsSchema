@@ -15,10 +15,10 @@ do
         mysqldump -u $dbUser -p$dbPasswd -h 127.0.0.1  --single-transaction  --quick --opt --skip-add-drop-table --no-data $db $table  > $db.$table.schema.sql
     done
     
-    #for table in $tables; do
-    #    echo "table-$db.$table"
-    #    mysqldump -u $dbUser -p$dbPasswd -h 127.0.0.1  --single-transaction  --quick --opt --skip-add-drop-table --no-create-info $db $table  > dbData/$db.$table.$dat.sql
-    #done
+    for table in $tables; do
+        echo "table-$db.$table"
+        mysqldump -u $dbUser -p$dbPasswd -h 127.0.0.1  --single-transaction  --quick --opt --skip-add-drop-table --no-create-info $db $table  > $db.$table.$dat.sql
+    done
 
     for view in $views; do
         echo "view-$db.$view"

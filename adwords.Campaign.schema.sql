@@ -25,15 +25,13 @@ CREATE TABLE `Campaign` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `customer_id` bigint(20) unsigned NOT NULL,
   `value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `remoteId` bigint(20) unsigned GENERATED ALWAYS AS (json_value(`value`,'$.id.value')) VIRTUAL,
-  `resource_name` varchar(255) GENERATED ALWAYS AS (concat('customers/',`customer_id`,'/campaigns/',`remoteId`)) VIRTUAL,
+  `resource_name` varchar(255) GENERATED ALWAYS AS (json_value(`value`,'$.resource_name')) VIRTUAL,
   `campaign_budget` varchar(255) GENERATED ALWAYS AS (json_value(`value`,'$.campaign_budget.value')) VIRTUAL,
   `remote_id` bigint(20) unsigned GENERATED ALWAYS AS (json_value(`value`,'$.id.value')) VIRTUAL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `resource_name` (`resource_name`),
   KEY `client_customer_id` (`customer_id`),
   KEY `campaign_budget` (`campaign_budget`),
-  KEY `remoteId` (`remoteId`),
   CONSTRAINT `Campaign_ibfk_1` FOREIGN KEY (`customer_id`) REFERENCES `Account` (`client_customer_id`),
   CONSTRAINT `Campaign_ibfk_2` FOREIGN KEY (`campaign_budget`) REFERENCES `CampaignBudget` (`resource_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
@@ -48,4 +46,4 @@ CREATE TABLE `Campaign` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-05 16:51:45
+-- Dump completed on 2019-07-05 17:53:45

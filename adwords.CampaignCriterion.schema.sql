@@ -26,11 +26,10 @@ CREATE TABLE `CampaignCriterion` (
   `value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `campaign` varchar(255) GENERATED ALWAYS AS (json_value(`value`,'$.campaign.value')) VIRTUAL,
   `remote_id` bigint(20) unsigned GENERATED ALWAYS AS (json_value(`value`,'$.criterion_id.value')) VIRTUAL,
-  `resource_name` varchar(255) GENERATED ALWAYS AS (concat(replace('customers/1/campaigns/762','campaigns','campaignCriteria'),'~',`remote_id`)) VIRTUAL,
+  `resource_name` varchar(255) GENERATED ALWAYS AS (json_value(`value`,'$.resource_name')) VIRTUAL,
   PRIMARY KEY (`id`),
   KEY `campaign` (`campaign`),
   KEY `remote_id` (`remote_id`),
-  KEY `resource_name` (`resource_name`),
   CONSTRAINT `CampaignCriterion_ibfk_1` FOREIGN KEY (`campaign`) REFERENCES `Campaign` (`resource_name`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -44,4 +43,4 @@ CREATE TABLE `CampaignCriterion` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2019-07-05 16:51:45
+-- Dump completed on 2019-07-05 17:53:45

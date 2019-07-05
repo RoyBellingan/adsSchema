@@ -16,14 +16,19 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Ad`
+-- Table structure for table `AdGroupCriterion`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Ad` (
-  `readme` text NOT NULL DEFAULT 'Ad obj is INSIDE AdGroupAd' COMMENT 'Ad obj is INSIDE AdGroupAd'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='Ad obj is INSIDE AdGroupAd';
+CREATE TABLE `AdGroupCriterion` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `value` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `resource_name` varchar(255) GENERATED ALWAYS AS (json_value(`value`,'$.resource_name')) VIRTUAL,
+  `remoteId` bigint(20) unsigned GENERATED ALWAYS AS (json_value(`value`,'$.criterion_id.value')) VIRTUAL,
+  `ad_group` bigint(20) unsigned GENERATED ALWAYS AS (json_value(`value`,'$.ad_group.value')) VIRTUAL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
