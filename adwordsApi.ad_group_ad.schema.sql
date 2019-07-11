@@ -1,6 +1,6 @@
 -- MySQL dump 10.17  Distrib 10.3.16-MariaDB, for Linux (x86_64)
 --
--- Host: 127.0.0.1    Database: adwords
+-- Host: 127.0.0.1    Database: adwordsApi
 -- ------------------------------------------------------
 -- Server version	10.3.16-MariaDB
 
@@ -16,21 +16,22 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `Account`
+-- Table structure for table `ad_group_ad`
 --
 
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Account` (
-  `id` int(11) NOT NULL AUTO_INCREMENT,
-  `manager_id` bigint(20) NOT NULL,
-  `client_customer_id` bigint(20) unsigned NOT NULL,
-  `account_name` varchar(255) NOT NULL,
-  `is_production` tinyint(2) NOT NULL,
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `client_customer_id` (`client_customer_id`),
-  KEY `manager_id` (`manager_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+CREATE TABLE `ad_group_ad` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `protoPath` varchar(255) COLLATE ascii_bin DEFAULT NULL COMMENT 'in theory is the same as of the apiName',
+  `protoType` varchar(255) COLLATE ascii_bin NOT NULL COMMENT 'like google.protobuf.StringValue',
+  `apiName` varchar(255) COLLATE ascii_bin NOT NULL COMMENT 'like ad_group_ad.ad.final_urls',
+  `apiPath` varchar(255) COLLATE ascii_bin NOT NULL COMMENT 'like adGroupAd.ad.finalUrls',
+  `category` varchar(255) COLLATE ascii_bin NOT NULL,
+  `type` varchar(255) COLLATE ascii_bin NOT NULL,
+  `repeated` bit(1) NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=125 DEFAULT CHARSET=ascii COLLATE=ascii_bin;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
